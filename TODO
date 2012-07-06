@@ -1,0 +1,25 @@
+TODO
+    - BUG: player turn does not flip correctly along edges
+    - add score
+    - detect end game conditions
+    - GAME SETUP: handle scenario when two people 'sit' at the same time -- loser should be told so
+    - GAME SETUP: ensure no duplicate alias
+    - NOTIFICATIONS: a players request to join the game has been accepted
+    - NOTIFICATIONS: player has requested to join the game
+    - NOTIFICATIONS: a move has been made
+    - NOTIFICATIONS: the game has been won
+
+TECHNICAL DEBT:
+    - protect against invalid game urls
+    - protect against same game url being generated twice
+    - detect player disconnect
+    - provide a proper deployment script
+    - validate player alias input
+
+LATER FEATURES:
+    - record and playback of games
+    - player chat
+    - persistent accounts
+    - game clock
+    - highlight last square populated
+    - forfeit
