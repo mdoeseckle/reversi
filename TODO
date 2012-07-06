@@ -7,11 +7,16 @@ TODO
     - GAME SETUP: validate player alias when click 'Play' button
     - GAME PLAY: need score
     - GAME PLAY: detect end game conditions
+    - GAME PLAY: need a way to indicate who just made a move and where it was
     - NOTIFICATIONS: the game has been won
     - SCENARIO: detect player disconnect
 
 TECHNICAL DEBT:
     - protect against same game url being generated twice (when enable multiple games)
+    - the messaging.js contains both game specific logic and messaging logic, should be decoupled
+    - reversi.js requires some refactoring --> there's some dead code, mixed formatting
+    - messaging is less than optimal --> the entire board is sent on every move made
+    - some of the embedding scripting within the games.html is static and can be extracted
 
 LATER FEATURES:
     - allow multiple simultaneous games
