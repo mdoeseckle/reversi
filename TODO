@@ -1,22 +1,20 @@
 TODO
     - BUG: player turn does not flip correctly along edges
-    - add score
-    - detect end game conditions
-    - GAME SETUP: handle scenario when two people 'sit' at the same time -- loser should be told so
+    - BUG: a player choosing to refresh his window causes him to lose status as player (unrecoverable)
+    - GAME SETUP: nice if game reset player headings upon new game without requiring refresh button
+    - GAME SETUP: must bounce server for new game
     - GAME SETUP: ensure no duplicate alias
-    - NOTIFICATIONS: a players request to join the game has been accepted
-    - NOTIFICATIONS: player has requested to join the game
-    - NOTIFICATIONS: a move has been made
+    - GAME SETUP: validate player alias when click 'Play' button
+    - GAME PLAY: need score
+    - GAME PLAY: detect end game conditions
     - NOTIFICATIONS: the game has been won
+    - SCENARIO: detect player disconnect
 
 TECHNICAL DEBT:
-    - protect against invalid game urls
-    - protect against same game url being generated twice
-    - detect player disconnect
-    - provide a proper deployment script
-    - validate player alias input
+    - protect against same game url being generated twice (when enable multiple games)
 
 LATER FEATURES:
+    - allow multiple simultaneous games
     - record and playback of games
     - player chat
     - persistent accounts
