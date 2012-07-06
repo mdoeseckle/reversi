@@ -24,10 +24,19 @@ function static(pathname, response) {
             break
     }
 
-    console.log("Request handler 'static' was called: " + pathname)
-    response.writeHead(200, {"Content-Type": "text/html"})
-    response.write('static')
-    response.end()
+    var filePath = '.' + pathname
+    if(fs.existsSync(filePath)) {
+        var fileContents = fs.readFileSync(filePath, 'utf8');
+
+        response.writeHead(200, {"Content-Type": contentType })
+        response.write(fileContents)
+        response.end()
+    } else {
+        console.log('ERROR: file not found: ' + pathname)
+        response.writeHead(404, {"Content-Type": "text/plain"})
+        response.write("404 Not found")
+        response.end()
+    } 
 }
 
 exports.newGame = newGame
