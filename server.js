@@ -14,7 +14,8 @@ function start(route, handle) {
 
     var app = http.createServer(onRequest).listen(PORT)
     var io = require('socket.io').listen(app)
-    io.sockets.on('connection', messaging.onConnect)
+
+    messaging.start(io)
     
     console.log("Server has started.")
 }

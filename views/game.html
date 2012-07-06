@@ -48,10 +48,16 @@
           buildGameboard()
           setupGame()
 
-          $('#playerInfo').bind('hide', setPlayer)
+          $('#playerInfo').bind('hide', requestJoin)
           $('#player_white').click(launchPlayerInfo)
           $('#player_black').click(launchPlayerInfo)
       })
+
+      function requestJoin() {
+        var color = $('#playerChoice').val().substring(8)
+        var alias = $('#alias').val()
+        socket.emit('requestJoin', { id: '%GAME_ID%', color: color, alias: alias })
+      }
 
       function setPlayer() {
           var playerHeader = $('#playerChoice').val()
@@ -68,9 +74,15 @@
 
       var socket = io.connect('http://localhost')
       socket.on('connect', register)
+      socket.on('playerJoin', updatePlayers)
 
       function register() {
           socket.emit('register', { id: '%GAME_ID%' })
+      }
+
+      function updatePlayers(data) {
+        alert(data.color)
+        alert(data.alias)
       }
 
     </script>
