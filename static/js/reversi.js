@@ -58,11 +58,6 @@ function dropPiece() {
       socket.emit('move', { color: playerColor, board: internalGrid })
   }
 
-  if(result) {
-    var current = playerColor
-    playerColor = opponentColor
-    opponentColor = current
-  } 
 }
 
 function flipRight(rowNo, columnNo) {
