@@ -73,20 +73,20 @@
       }
 
       var socket = io.connect('http://localhost')
+
       socket.on('connect', function() { 
           $('#alertBox').hide() 
       })
 
-      socket.on('playerJoin', updatePlayers)
-      socket.on('joinAccepted', function(data) {
-        setPlayer(data.color, $('#alias').val())
-        playerColor = color
-        isPlayerTurn = (color == 'white')
+      socket.on('playerJoin', function(data) {
+          setPlayer(data.color, data.alias)
       })
 
-      function updatePlayers(data) {
-        setPlayer(data.color, data.alias)
-      }
+      socket.on('joinAccepted', function(data) {
+        setPlayer(data.color, $('#alias').val())
+        playerColor = data.color
+        isPlayerTurn = (data.color == 'white')
+      })
 
     </script>
   </body>
