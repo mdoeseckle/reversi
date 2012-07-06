@@ -2,6 +2,7 @@ var PORT = 8888
 
 var http = require('http')
 var url = require('url')
+var messaging = require('./messaging')
 
 function start(route, handle) {
     function onRequest(request, response) {
@@ -11,7 +12,10 @@ function start(route, handle) {
         route(handle, pathname, response)
     }
 
-    http.createServer(onRequest).listen(PORT)
+    var app = http.createServer(onRequest).listen(PORT)
+    var io = require('socket.io').listen(app)
+    io.sockets.on('connection', messaging.onConnect)
+    
     console.log("Server has started.")
 }
 

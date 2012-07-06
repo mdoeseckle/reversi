@@ -27,6 +27,7 @@ function game(pathname, response) {
     console.log('loading game: ' + gameId)
 
     var fileContents = fs.readFileSync('./views/game.html', 'utf8')
+    fileContents = fileContents.replace('%GAME_ID%', gameId)
     response.writeHead(200, {"Content-Type": "text/html"})
     response.write(fileContents)
     response.end()

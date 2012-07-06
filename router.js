@@ -1,6 +1,4 @@
 function route(handles, pathname, response) {
-    console.log("About to route a request for '" + pathname + "'");
-
     var pname = pathname.substring(1)                 //remove leading forward slash
 
     for(var index = 0; index < handles.length; index++) {

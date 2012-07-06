@@ -40,6 +40,7 @@
 
     <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
     <script src="static/js/bootstrap.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="static/js/reversi.js"></script>
 
     <script type="text/javascript">
@@ -48,10 +49,9 @@
           setupGame()
 
           $('#playerInfo').bind('hide', setPlayer)
-          $('#player_white').click(launchPlayerInfo);
-          $('#player_black').click(launchPlayerInfo);
-
-      });
+          $('#player_white').click(launchPlayerInfo)
+          $('#player_black').click(launchPlayerInfo)
+      })
 
       function setPlayer() {
           var playerHeader = $('#playerChoice').val()
@@ -66,6 +66,12 @@
           $('#playerInfo').modal({ keyboard: false })
       }
 
+      var socket = io.connect('http://localhost')
+      socket.on('connect', register)
+
+      function register() {
+          socket.emit('register', { id: '%GAME_ID%' })
+      }
 
     </script>
   </body>
