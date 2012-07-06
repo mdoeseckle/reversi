@@ -65,6 +65,15 @@
           var id = '#player_' + color
           $(id).children().remove()
           $(id).text(alias)
+
+          if(color == 'white') {
+            playerWhite = alias
+            $(id).addClass('turn')
+          } else {
+            playerBlack = alias
+          }
+
+          gameplayEnabled = (playerWhite && playerBlack) 
       }
 
       function launchPlayerInfo() {
@@ -87,6 +96,16 @@
         playerColor = data.color
         isPlayerTurn = (data.color == 'white')
       })
+    
+      socket.on('recap', function(data) {
+        if(data.white) {
+          setPlayer('white', data.white)
+        }
+        if(data.black) {
+          setPlayer('black', data.black)
+        }
+      })
+
 
     </script>
   </body>

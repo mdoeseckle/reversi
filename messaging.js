@@ -15,6 +15,8 @@ function onConnect(socket) {
             socket.emit('joinAccepted', { 'color': data.color })
         }
     })
+
+    socket.emit('recap', { 'white': game.white, 'black': game.black })
 }
 
 exports.start = start

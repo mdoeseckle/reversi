@@ -1,8 +1,12 @@
 
 var isPlayerTurn = false
-var playerColor = 'white'
-var opponentColor = 'black'
+var playerColor = null
+var opponentColor = null
 var internalGrid = setupInternalGrid()
+
+var playerWhite = null
+var playerBlack = null
+var gameplayEnabled = false
 
 function buildGameboard() {
   for(rindex = 1; rindex <= 8; rindex++) {
@@ -31,7 +35,7 @@ function buildGameboard() {
 }
 
 function dropPiece() {
-  if(!isPlayerTurn) return
+  if(!isPlayerTurn || !gameplayEnabled) return
 
   var square = '#' + $(this).attr('id')
   var rowNo = parseInt(square[9])
