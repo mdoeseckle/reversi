@@ -1,8 +1,20 @@
 var fs = require('fs')
 var path = require('path')
 
+var GAMEID_CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+var GAMEID_LENGTH = 6 
+
+function createGameId()
+{
+    var id = ''
+    for(var i = 0; i < GAMEID_LENGTH; i++)
+        id += GAMEID_CHARSET.charAt(Math.floor(Math.random() * GAMEID_CHARSET.length));
+
+    return id;
+}
+
 function newGame(pathname, response) {
-    console.log('new game')
+    console.log('new game: ' + createGameId())
 }
 
 function game(pathname, response) {
