@@ -48,7 +48,6 @@
     <script type="text/javascript">
       $(document).ready(function() {
           buildGameboard()
-          setupGame()
 
           $('#playerInfo').bind('hide', requestJoin)
           $('#player_white').click(launchPlayerInfo)
@@ -108,8 +107,9 @@
         if(data.black) {
           setPlayer('black', data.black)
         }
-      })
 
+        updateBoard(data.board)
+      })
 
     </script>
   </body>

@@ -2,7 +2,7 @@
 var isPlayerTurn = false
 var playerColor = null
 var opponentColor = null
-var internalGrid = setupInternalGrid()
+var internalGrid = null
 
 var playerWhite = null
 var playerBlack = null
@@ -239,18 +239,15 @@ function setupGame() {
   $('#square_r5_c5').append(createPiece('white'))       
   $('#square_r4_c5').append(createPiece('black'))       
   $('#square_r5_c4').append(createPiece('black'))
-
-  internalGrid[4][4] = 'white'
-  internalGrid[4][5] = 'black'
-  internalGrid[5][5] = 'white'
-  internalGrid[5][4] = 'black'
 }
 
-function setupInternalGrid() {
-  grid = new Array(9);
-  for (row = 0; row < grid.length; ++row)
-      grid[row] = new Array(9);
-  
-  return grid
+function updateBoard(board) {
+    internalGrid = board
+    for(row = 1; row <= 8; row++) {
+        for(col = 1; col <= 8; col++) {
+            var id = '#square_r' + row + '_c' + col
+            $(id).children().remove()
+            $(id).append(createPiece(board[row][col]))
+        }
+    }
 }
-
