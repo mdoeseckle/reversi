@@ -7,8 +7,8 @@ var pair = function(pattern, handle) {
 }
 
 var handle = []
-handle.push(pair(/^$/, requestHandlers.newGame))
-handle.push(pair(/^[\w|\d]+$/, requestHandlers.game))
+handle.push(pair(/^$/, requestHandlers.game))
+//handle.push(pair(/^[\w|\d]+$/, requestHandlers.game))
 handle.push(pair(/^static\/\w+/, requestHandlers.static))
 
 server.start(router.route, handle)

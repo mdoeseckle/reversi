@@ -22,12 +22,8 @@ function newGame(pathname, response) {
 }
 
 function game(pathname, response) {
-    var pattern = /^[\w|\d]+$/
-    var gameId = pathname.substring(1).match(pattern)      //drop leading forward slash
-    console.log('loading game: ' + gameId)
-
+    console.log('loading game page')
     var fileContents = fs.readFileSync('./views/game.html', 'utf8')
-    fileContents = fileContents.replace(/%GAME_ID%/g, gameId)
     response.writeHead(200, {"Content-Type": "text/html"})
     response.write(fileContents)
     response.end()

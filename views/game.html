@@ -23,6 +23,8 @@
       </div>
     </div>
 
+    <p id="alertBox">Connecting to server...</p>
+
     <div style="margin: 30px">
       <p id="player_white" class="player">
         <a class="btn">Play White</a>
@@ -56,15 +58,13 @@
       function requestJoin() {
         var color = $('#playerChoice').val().substring(8)
         var alias = $('#alias').val()
-        socket.emit('requestJoin', { id: '%GAME_ID%', color: color, alias: alias })
+        socket.emit('requestJoin', { color: color, alias: alias })
       }
 
-      function setPlayer() {
-          var playerHeader = $('#playerChoice').val()
-          $(playerHeader).children().remove()
-          $(playerHeader).text($('#alias').val())
-          playerColor = playerHeader.substring(8)
-          isPlayerTurn = (playerColor == 'white')
+      function setPlayer(color, alias) {
+          var id = '#player_' + color
+          $(id).children().remove()
+          $(id).text(alias)
       }
 
       function launchPlayerInfo() {
@@ -73,16 +73,19 @@
       }
 
       var socket = io.connect('http://localhost')
-      socket.on('connect', register)
-      socket.on('playerJoin', updatePlayers)
+      socket.on('connect', function() { 
+          $('#alertBox').hide() 
+      })
 
-      function register() {
-          socket.emit('register', { id: '%GAME_ID%' })
-      }
+      socket.on('playerJoin', updatePlayers)
+      socket.on('joinAccepted', function(data) {
+        setPlayer(data.color, $('#alias').val())
+        playerColor = color
+        isPlayerTurn = (color == 'white')
+      })
 
       function updatePlayers(data) {
-        alert(data.color)
-        alert(data.alias)
+        setPlayer(data.color, data.alias)
       }
 
     </script>
