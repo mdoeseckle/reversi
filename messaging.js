@@ -11,9 +11,14 @@ function onConnect(socket) {
     socket.on('requestJoin', function(data) {
         if(activeGame[data.color] == null) {
             activeGame[data.color] = data.alias
-            socket.broadcast.emit('playerJoin', { 'color': data.color, 'alias': data.alias });
+            socket.broadcast.emit('playerJoin', { 'color': data.color, 'alias': data.alias })
             socket.emit('joinAccepted', { 'color': data.color })
         }
+    })
+
+    socket.on('move', function(data) {
+        activeGame.board = data.board
+        socket.broadcast.emit('move', data)
     })
 
     socket.emit('recap', { 'white': activeGame.white, 'black': activeGame.black, 'board' : activeGame.board })

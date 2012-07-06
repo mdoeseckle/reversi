@@ -111,6 +111,11 @@
         updateBoard(data.board)
       })
 
+      socket.on('move', function(data) {
+        updateBoard(data.board)
+        isPlayerTurn = playerColor && (data.color != playerColor)
+      })
+
     </script>
   </body>
 </html>

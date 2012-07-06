@@ -55,6 +55,10 @@ function dropPiece() {
       flipUpRight(rowNo, columnNo)
 
   if(result) {
+      socket.emit('move', { color: playerColor, board: internalGrid })
+  }
+
+  if(result) {
     var current = playerColor
     playerColor = opponentColor
     opponentColor = current
