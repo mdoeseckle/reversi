@@ -1,0 +1,7 @@
+install node.js:
+
+    http://nodejs.org/
+
+install socket.io:
+    
+    npm install socket.io
