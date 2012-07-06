@@ -8,8 +8,7 @@ var pair = function(pattern, handle) {
 
 var handle = []
 handle.push(pair(/^$/, requestHandlers.newGame))
+handle.push(pair(/^[\w|\d]+$/, requestHandlers.game))
 handle.push(pair(/^static\/\w+/, requestHandlers.static))
-
-    //url(r'^(?P<game_id>[\w|\d]+)$', 'reversi.views.game', name='game'),
 
 server.start(router.route, handle)

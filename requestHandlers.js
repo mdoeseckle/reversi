@@ -1,27 +1,35 @@
 var fs = require('fs')
 var path = require('path')
 
-var GAMEID_CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+var GAMEID_CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 var GAMEID_LENGTH = 6 
 
 function createGameId()
 {
     var id = ''
     for(var i = 0; i < GAMEID_LENGTH; i++)
-        id += GAMEID_CHARSET.charAt(Math.floor(Math.random() * GAMEID_CHARSET.length));
+        id += GAMEID_CHARSET.charAt(Math.floor(Math.random() * GAMEID_CHARSET.length))
 
-    return id;
+    return id
 }
 
 function newGame(pathname, response) {
-    console.log('new game: ' + createGameId())
+    var gameId = createGameId()
+    console.log('creating new game: ' + gameId)
+
+    response.writeHead(302, { 'Location': '/' + gameId });
+    response.end()
 }
 
 function game(pathname, response) {
-  console.log("Request handler 'game' was called.");
-    response.writeHead(200, {"Content-Type": "text/html"});
-    response.write('game');
-    response.end();
+    var pattern = /^[\w|\d]+$/
+    var gameId = pathname.substring(1).match(pattern)      //drop leading forward slash
+    console.log('loading game: ' + gameId)
+
+    var fileContents = fs.readFileSync('./views/game.html', 'utf8')
+    response.writeHead(200, {"Content-Type": "text/html"})
+    response.write(fileContents)
+    response.end()
 }
 
 function static(pathname, response) {
