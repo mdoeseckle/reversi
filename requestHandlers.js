@@ -1,6 +1,10 @@
 var fs = require('fs')
 var path = require('path')
 
+function newGame(pathname, response) {
+    console.log('new game')
+}
+
 function game(pathname, response) {
   console.log("Request handler 'game' was called.");
     response.writeHead(200, {"Content-Type": "text/html"});
@@ -26,5 +30,6 @@ function static(pathname, response) {
     response.end()
 }
 
+exports.newGame = newGame
 exports.game = game
 exports.static = static
