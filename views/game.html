@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Reversi</title>
+
+    <link type="text/css" rel="stylesheet" href="static/css/bootstrap.css"/>
+    <link type="text/css" rel="stylesheet" href="static/css/reversi.css"/>
+
+  </head>
+  <body>
+    <div class="modal hide" id="playerInfo">
+      <div class="modal-header">
+        <h3>Player Info</h3>
+      </div>
+      <div class="modal-body">
+        <p>
+          What is your name?<br/>
+          <input type="text" id="alias" name="alias"></input>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" data-dismiss="modal" class="btn btn-primary">Play</a>
+      </div>
+    </div>
+
+    <div style="margin: 30px">
+      <p id="player_white" class="player">
+        <a class="btn">Play White</a>
+      </p>
+      <p>
+        <div id="gameboard" class="gameboard"></div>
+      </p>
+      <p id="player_black" class="player">
+        <a class="btn">Play Black</a>
+      </p>
+    <div>
+
+    <input type="hidden" id="playerChoice" val=""/>
+    <input type="hidden" id="availableSpaces" val="62"/>
+
+    <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
+    <script src="static/js/bootstrap.js"></script>
+    <script src="static/js/reversi.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+          buildGameboard()
+          setupGame()
+
+          $('#playerInfo').bind('hide', setPlayer)
+          $('#player_white').click(launchPlayerInfo);
+          $('#player_black').click(launchPlayerInfo);
+
+      });
+
+      function setPlayer() {
+          var playerHeader = $('#playerChoice').val()
+          $(playerHeader).children().remove()
+          $(playerHeader).text($('#alias').val())
+          playerColor = playerHeader.substring(8)
+          isPlayerTurn = (playerColor == 'white')
+      }
+
+      function launchPlayerInfo() {
+          $('#playerChoice').val('#' + $(this).attr('id'))
+          $('#playerInfo').modal({ keyboard: false })
+      }
+
+
+    </script>
+  </body>
+</html>
