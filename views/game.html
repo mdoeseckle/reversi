@@ -58,9 +58,13 @@
       function requestJoin() {
         var color = $('#playerChoice').val().substring(8)
         var alias = $('#alias').val()
+
+        $('#player_white').unbind('click')
+        $('#player_black').unbind('click')
+
         socket.emit('requestJoin', { color: color, alias: alias })
       }
-
+      
       function setPlayer(color, alias) {
           var id = '#player_' + color
           $(id).children().remove()
